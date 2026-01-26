@@ -14,14 +14,6 @@ jobs:
       run: cd mkbootimg_tools && rm -rf boot && ./mkboot boot.img boot
     - name: clean boot
       run: git reset --hard
-    - name: Install Python2
-      run: |
-        sudo apt update
-        sudo apt install -y software-properties-common
-        sudo add-apt-repository ppa:deadsnakes/ppa -y
-        sudo apt update
-        sudo apt install -y python2 python2-dev python2-minimal
-        python2 --version
     - name: make
       run: bash build-kernel.sh
     - name: Upload artifact
