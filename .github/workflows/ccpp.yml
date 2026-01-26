@@ -14,6 +14,8 @@ jobs:
       run: cd mkbootimg_tools && rm -rf boot && ./mkboot boot.img boot
     - name: clean boot
       run: git reset --hard
+    - name: install build
+      run: apt-get install -y build-essential bc libncurses-dev bison flex
     - name: make
       run: bash build-kernel.sh
     - name: Upload artifact
