@@ -17,12 +17,12 @@ jobs:
     - name: make
       run: bash build-kernel.sh
     - name: Upload artifact
-      uses: actions/upload-artifact@v1.0.0
+      uses: actions/upload-artifact@v4
       with:
         name: V1.6
         path: READY-KERNEL/
     - name: Upload module artifact
-      uses: actions/upload-artifact@v1.0.0
+      uses: actions/upload-artifact@v4
       with:
         name: modules
         path: sagit_wlan_magisk/
