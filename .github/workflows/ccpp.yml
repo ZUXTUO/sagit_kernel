@@ -5,9 +5,7 @@ on: [push]
 jobs:
   build:
 
-    runs-on: ubuntu-latest
-    container:
-      image: python:2.7 
+    runs-on: ubuntu-20.04
     steps:
     - uses: actions/checkout@v2
     - name: prepare boot
@@ -15,7 +13,7 @@ jobs:
     - name: clean boot
       run: git reset --hard
     - name: install build
-      run: apt-get install -y build-essential bc libncurses-dev bison flex
+      run: apt-get install -y python2
     - name: make
       run: bash build-kernel.sh
     - name: Upload artifact
