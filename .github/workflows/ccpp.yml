@@ -17,6 +17,7 @@ jobs:
         curl -LsSf https://astral.sh/uv/install.sh | sh
         echo 'export PATH=$HOME/.uv/bin:$PATH' >> $GITHUB_ENV
         source $GITHUB_ENV
+        uv python list
     - name: Install Python2
       run: |
         uv python install 2.7.18
