@@ -14,14 +14,14 @@ jobs:
       run: git reset --hard
     - name: Install uv
       run: |
-        curl -LsSf https://astral.sh/uv/install.sh | sh
-        echo 'export PATH=$HOME/.uv/bin:$PATH' >> $GITHUB_ENV
-        source $GITHUB_ENV
-        uv python list
-    - name: Install Python2
-      run: |
-        uv python install 2.7.18
-        uv venv --python 2.7.18
+        apt update
+        apt install -y build-essential libssl-dev zlib1g-dev \
+        libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm \
+        libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev \
+        libffi-dev liblzma-dev git
+        curl https://pyenv.run | bash
+        pyenv install 2.7.18
+        pyenv local 2.7.18
     - name: make
       run: source .venv/bin/activate && bash build-kernel.sh
     - name: Upload artifact
