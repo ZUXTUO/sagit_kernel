@@ -12,17 +12,27 @@ jobs:
       run: cd mkbootimg_tools && rm -rf boot && ./mkboot boot.img boot
     - name: clean boot
       run: git reset --hard
-    - name: python
-      run: sudo apt install -y python2
-    - name: make
-      run: bash build-kernel.sh
+    - name: Install uv
+      run: |
+        sudo apt update
+        sudo apt install -y build-essential libssl-dev zlib1g-dev \
+        libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm \
+        libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev \
+        libffi-dev liblzma-dev git
+        curl https://pyenv.run | bash
+        export PYENV_ROOT="$HOME/.pyenv"
+        [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+        eval "$(pyenv init - bash)"
+        pyenv install 2.7.18
+        pyenv local 2.7.18
+        bash build-kernel.sh
     - name: Upload artifact
-      uses: actions/upload-artifact@v1.0.0
+      uses: actions/upload-artifact@v4
       with:
         name: V1.6
         path: READY-KERNEL/
     - name: Upload module artifact
-      uses: actions/upload-artifact@v1.0.0
+      uses: actions/upload-artifact@v4
       with:
         name: modules
         path: sagit_wlan_magisk/
